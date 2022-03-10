@@ -40,10 +40,12 @@ class RegisterConsole
             $command = implode(' ', $args);
 
             foreach ($assoc_args as $key => $value) {
-                $command .= " --{$key}";
-
-                if ($value !== true) {
-                    $command .= "='{$value}'";
+                if ($value === true) {
+                    $command .= " --{$key}";
+                } else if ($value === false) {
+                    $command .= " --no-{$key}";
+                } else {
+                    $command .= " --{$key}='{$value}'";
                 }
             }
 
